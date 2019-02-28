@@ -15,3 +15,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: mvn clean install
+      - run: cd..
+      - run: docker build --pull -t odk/sync-web-ui https://github.com/opendatakit/sync-endpoint-web-ui.git
+      - run: docker build --pull -t odk/db-bootstrap db-bootstrap
+      - run: docker build --pull -t odk/openldap openldap
+      - run: docker build --pull -t odk/phpldapadmin phpldapadmin
+      - run: docker stack deploy -c docker-compose.yml syncldap
