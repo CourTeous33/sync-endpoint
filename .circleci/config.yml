@@ -14,7 +14,12 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: mvn clean install
+      - run: mvn validate
+      - run: mvn compile
+      - run: mvn test
+      - run: mvn package
+      - run: mvn varify
+      - run: mvn install
       - run: cd..
       - run: docker build --pull -t odk/sync-web-ui https://github.com/opendatakit/sync-endpoint-web-ui.git
       - run: docker build --pull -t odk/db-bootstrap db-bootstrap
