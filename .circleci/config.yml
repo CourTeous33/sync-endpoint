@@ -15,7 +15,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: mvn validate
-      - run: mvn compile
+      - run: mvn -pl sync-endpoint-war/ compile
+      - run: mvn -pl odk-rest-interface/ compile
+      - run: mvn -pl sync-endpoint-docker-test/ compile
+      - run: mvn -pl postgres-test/ compile
+      - run: mvn -pl mysql-test/ compile
       - run: mvn test
       - run: mvn package
       - run: mvn varify
