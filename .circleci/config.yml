@@ -17,7 +17,7 @@ jobs:
       - run: mvn validate
       - run: mvn -pl sync-endpoint-war/ clean install
       - run: mvn -pl odk-rest-interface/ clean install
-      - run: mvn -o -pl sync-endpoint-docker-test/ compile
+      - run: mvn -o -e -pl sync-endpoint-docker-test/ compile
       - run: mvn -o -pl postgres-test/ compile
       - run: mvn -o -pl mysql-test/ compile
       - run: mvn test
