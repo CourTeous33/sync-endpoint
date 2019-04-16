@@ -4,6 +4,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8u171-jdk
+      - image: postgres:9.6.2-alpine
 
     working_directory: ~/repo
 
@@ -22,7 +23,7 @@ jobs:
       - run:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-       - run: mvn validate
+      - run: mvn validate
       - run: mvn -pl sync-endpoint-war/ clean install
       - run: mvn -pl odk-rest-interface/ clean install
       - run: mvn -nsu -e -pl sync-endpoint-docker-test/ compile
