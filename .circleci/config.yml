@@ -26,7 +26,10 @@ jobs:
       - run: mvn validate
       - run: mvn -pl sync-endpoint-war/ clean install
       - run: mvn -pl odk-rest-interface/ clean install
+      - run: mvn -nsu -pl sync-endpoint-docker-swarm/ compile
       - run: mvn -nsu -pl sync-endpoint-docker-test/ compile
+      - run: mvn -nsu -pl postgres-test/ compile
+      - run: mvn -nsu -pl mysql-test/ compile
       - run: cd ..
       - run: docker build --pull -t odk/sync-web-ui https://github.com/opendatakit/sync-endpoint-web-ui.git
       - run: docker build --pull -t odk/db-bootstrap db-bootstrap
