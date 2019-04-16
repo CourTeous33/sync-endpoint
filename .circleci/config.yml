@@ -22,8 +22,11 @@ jobs:
       - run:
           name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run: mvn clean install
-      - run: cd..
+       - run: mvn validate
+      - run: mvn -pl sync-endpoint-war/ clean install
+      - run: mvn -pl odk-rest-interface/ clean install
+      - run: mvn -nsu -e -pl sync-endpoint-docker-test/ compile
+      - run: cd ..
       - run: docker build --pull -t odk/sync-web-ui https://github.com/opendatakit/sync-endpoint-web-ui.git
       - run: docker build --pull -t odk/db-bootstrap db-bootstrap
       - run: docker build --pull -t odk/openldap openldap
