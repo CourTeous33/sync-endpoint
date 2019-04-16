@@ -14,16 +14,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: mvn validate
-      - run: mvn -pl sync-endpoint-war/ clean install
-      - run: mvn -pl odk-rest-interface/ clean install
-      - run: mvn -nsu -e -pl sync-endpoint-docker-test/ compile
-      - run: mvn -o -pl postgres-test/ compile
-      - run: mvn -o -pl mysql-test/ compile
-      - run: mvn test
-      - run: mvn package
-      - run: mvn varify
-      - run: mvn install
+      - run: mvn clean install
       - run: cd..
       - run: docker build --pull -t odk/sync-web-ui https://github.com/opendatakit/sync-endpoint-web-ui.git
       - run: docker build --pull -t odk/db-bootstrap db-bootstrap
